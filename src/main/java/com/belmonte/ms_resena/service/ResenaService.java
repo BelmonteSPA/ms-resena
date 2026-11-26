@@ -3,16 +3,12 @@ package com.belmonte.ms_resena.service;
 import com.belmonte.ms_resena.dto.ResenaDTO;
 import com.belmonte.ms_resena.modulo.Resena;
 import com.belmonte.ms_resena.repository.ResenaRepository;
-import org.springframework.transaction.annotation.Transactional;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Builder
 public class ResenaService {
 
     private final ResenaRepository resenaRepository;
@@ -30,6 +26,7 @@ public class ResenaService {
         Resena guardada = resenaRepository.save(resena);
         return convertirADto(guardada);
     }
+
     @Transactional(readOnly = true)
     public Double obtenerPromedioCalificacion(Long idEvaluado) {
         Double promedio = resenaRepository.obtenerPromedioCalificacion(idEvaluado);
@@ -41,12 +38,10 @@ public class ResenaService {
                 .idResena(entity.getIdResena())
                 .idViaje(entity.getIdViaje())
                 .idEvaluador(entity.getIdEvaluador())
-                .idEvaluado(entity.getIdEvaluador())
+                .idEvaluado(entity.getIdEvaluado())
                 .calificacion(entity.getCalificacion())
                 .comentario(entity.getComentario())
                 .fechaCreacion(entity.getFechaCreacion())
                 .build();
     }
-
-
 }

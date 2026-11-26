@@ -5,9 +5,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "ms-viaje", path = "/api/viajes")
+//Con Eureka activo, "clients.viajes.url" se deja vacio y se resuelve por el nombre ms-viajes
+@FeignClient(name = "ms-viajes", url = "${clients.viajes.url:}")
 public interface ViajeCliente {
 
-    @GetMapping("/{idViaje}")
+    @GetMapping("/api/v1/viajes/{idViaje}")
     ViajeDTO obtenerViajePorId(@PathVariable("idViaje") Long idViaje);
 }

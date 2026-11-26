@@ -8,22 +8,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/reseñas")
+@RequestMapping("/api/v1/resenas")
 @RequiredArgsConstructor
 public class ResenaController {
 
     private final ResenaService resenaService;
 
+    //POST /api/v1/resenas
     @PostMapping
     public ResponseEntity<ResenaDTO> crearResena(@Valid @RequestBody ResenaDTO dto) {
         ResenaDTO nuevaResena = resenaService.crearResena(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevaResena);
     }
 
-
+    //GET /api/v1/resenas/evaluado/{idEvaluado}/promedio
     @GetMapping("/evaluado/{idEvaluado}/promedio")
     public ResponseEntity<Double> obtenerPromedioCalificacion(@PathVariable Long idEvaluado) {
         Double promedio = resenaService.obtenerPromedioCalificacion(idEvaluado);

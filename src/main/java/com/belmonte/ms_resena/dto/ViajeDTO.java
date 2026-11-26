@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 public class ViajeDTO {
 
-    private Long idViaje;
+    private Long id;
     private Long idPasajero;
     private Long idConductor;
     private String estado;
