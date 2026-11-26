@@ -12,3 +12,4 @@ public interface ViajeCliente {
     @GetMapping("/api/v1/viajes/{idViaje}")
     ViajeDTO obtenerViajePorId(@PathVariable("idViaje") Long idViaje);
 }
+//prueba
