@@ -4,20 +4,37 @@ server:
 spring:
   application:
     name: ms-resena
-
-  datasource:
-    url: ${DB_URL:jdbc:mysql://localhost:3306/db_resena?createDatabaseIfNotExist=true&serverTimezone=America/Santiago}
-    username: ${DB_USER:root}
-    password: ${DB_PASSWORD:}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  docker:
+    compose:
+      enabled: true
+      lifecycle-management: start_only
+  cloud:
+    discovery:
+      enabled: ${SPRING_CLOUD_DISCOVERY_ENABLED:true}
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: ${FEIGN_CONNECT_TIMEOUT:3000}
+            readTimeout: ${FEIGN_READ_TIMEOUT:5000}
+            loggerLevel: basic
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/db_resena}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:Duoc.2026}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
 
 # URL de ms-viajes (con Eureka activo se deja vacia y se resuelve por nombre)
-clients:
+ms:
   viajes:
     url: ${MS_VIAJES_URL:http://localhost:8084}
 
